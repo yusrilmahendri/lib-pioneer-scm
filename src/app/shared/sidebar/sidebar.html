@@ -1,0 +1,51 @@
+<aside class="sidebar d-flex flex-column p-3" [class.collapsed]="isCollapsed">
+  <!-- Tombol toggle ☰ -->
+  <button class="toggle-btn d-lg-none" (click)="toggleSidebar()">☰</button>
+
+  <div class="brand text-center">
+    <img
+      src="assets/images/logo-dashboard.png"
+      alt="PioneerSolve"
+      class="logo img-fluid"
+    />
+    <div class="divider"></div>
+  </div>
+
+<nav class="nav flex-column w-100 sidebar-menu">
+  <a routerLink="/dashboard" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4 mt-3">
+    <i class="fa-solid fa-gauge me-3"></i>
+    <span>Dashboard</span>
+  </a>
+
+  <a [routerLink]="['business']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
+    <i class="fa-regular fa-folder-closed me-3"></i>
+    <span>Kelola Akun Bisnis</span>
+  </a>
+
+  <a [routerLink]="['monitoring-products']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
+    <i class="fa-solid fa-briefcase me-3"></i>
+    <span>Monitoring Produk</span>
+  </a>
+
+  <a [routerLink]="['data-pegawai']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
+    <i class="fa-solid fa-users me-3"></i>
+    <span>Akun Pegawai</span>
+  </a>
+
+  <a [routerLink]="['Profile Saya']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
+    <i class="fa-regular fa-user me-3"></i>
+    <span>Profil Saya</span>
+  </a>
+
+
+  <!-- Tombol Logout (Selalu di bagian bawah) -->
+  <div class="w-100 mt-2">
+    <a  class="nav-link d-flex align-items-center text-danger">
+      <i class="fa-solid fa-right-from-bracket me-3"></i>
+      <span>Keluar Akun</span>
+    </a>
+  </div>
+</nav>
+
+
+</aside>

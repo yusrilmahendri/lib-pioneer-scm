@@ -1,0 +1,104 @@
+<div class="container-fluid px-4 py-3">
+  <div class="card border-0 shadow-sm rounded-4">
+    <div class="card-body">
+      <!-- Header -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h5 class="fw-semibold mb-1">Kelola Bisnis</h5>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb small mb-0">
+              <li class="breadcrumb-item">
+                <a href="#" class="text-decoration-none text-primary">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Kelola Bisnis</li>
+            </ol>
+          </nav>
+        </div>
+      
+      </div>
+
+      <hr class="text-muted" />
+        <div class="d-flex justify-content-end gap-2 mb-5 mt-3">
+          <button class="btn btn-outline-secondary d-flex align-items-center">
+            <i class="fa-solid fa-print me-2"></i> Cetak
+          </button>
+          <button class="btn btn-primary d-flex align-items-center">
+            <i class="fa-solid fa-plus me-2"></i> Tambah Bisnis
+          </button>
+        </div>
+      <!-- Filter dan Search -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <select class="form-select form-select-sm w-auto">
+            <option>5</option>
+            <option>10</option>
+            <option>25</option>
+          </select>
+        </div>
+        <div class="position-relative">
+          <input
+            type="text"
+            class="form-control form-control-sm ps-5"
+            placeholder="Cari bisnis..."
+          />
+          <i
+            class="fa-solid fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-secondary"
+          ></i>
+        </div>
+      </div>
+
+      <!-- Tabel -->
+      <div class="table-responsive">
+        <table class="table align-middle table-bordered border-light">
+          <thead class="table-light">
+            <tr>
+              <th style="width: 50px;">No.</th>
+              <th>Nama Bisnis</th>
+              <th>Kategori Bisnis</th>
+              <th>Lokasi Bisnis</th>
+              <th>Tanggal Mulai Bisnis</th>
+              <th>Status Bisnis</th>
+              <th style="width: 120px;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bisnis of daftarBisnis; let i = index">
+              <td>{{ i + 1 }}.</td>
+              <td>{{ bisnis.nama }}</td>
+              <td>{{ bisnis.kategori }}</td>
+              <td>{{ bisnis.lokasi }}</td>
+              <td>{{ bisnis.tanggalMulai }}</td>
+              <td>
+                <span
+                  class="badge px-3 py-2 rounded-pill"
+                  [ngClass]="{
+                    'bg-primary-subtle text-primary': bisnis.status === 'Aktif',
+                    'bg-danger-subtle text-danger': bisnis.status === 'Nonaktif'
+                  }"
+                  >{{ bisnis.status }}</span
+                >
+              </td>
+              <td>
+                <div class="d-flex gap-2 justify-content-center">
+                  <button class="btn btn-sm btn-link text-primary p-0">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                  </button>
+                  <button class="btn btn-sm btn-link text-primary p-0">
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+                  <button class="btn btn-sm btn-link text-danger p-0">
+                    <i class="fa-regular fa-trash-can"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-muted small mb-0">
+        Menampilkan 1–{{ daftarBisnis.length }} dari {{ daftarBisnis.length }} hasil
+      </p>
+    </div>
+  </div>
+</div>

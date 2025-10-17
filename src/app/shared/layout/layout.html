@@ -1,0 +1,27 @@
+<div class="d-flex flex-column min-vh-100 bg-light">
+  <!-- Navbar (full width) -->
+  <app-navbar></app-navbar>
+
+  <div class="d-flex flex-grow-1">
+    <!-- Sidebar -->
+    <aside class="" style="width: 250px;">
+      <app-sidebar></app-sidebar>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-grow-1 d-flex flex-column">
+      <!-- Main body (tanpa auto scroll global) -->
+      <main class="flex-grow-1 p-4">
+        <!-- Scroll hanya di dalam kontainer tabel -->
+       
+          <router-outlet></router-outlet>
+      
+      </main>
+
+      <!-- Footer -->
+      <footer class="text-center small text-muted py-2">
+        © 2025 PioneerSolve — All rights reserved.
+      </footer>
+    </div>
+  </div>
+</div>

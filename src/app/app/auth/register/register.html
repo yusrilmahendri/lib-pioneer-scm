@@ -1,0 +1,49 @@
+  <div class="auth-container d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card shadow-sm p-4" style="width: 380px; border-radius: 16px;">
+        <div class="text-center mb-4">
+          <img src="assets/images/logo.png" alt="PioneerSolve" width="40">
+          <h5 class="mt-2 fw-bold">Buat Akun Baru</h5>
+        </div>
+
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" placeholder="Nama Lengkap">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Number WhatsApp</label>
+            <input type="text" class="form-control" placeholder="0895xxxxxx">
+          </div>
+
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="nama@email.com">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="••••••••">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Konfirmasi Password</label>
+            <input type="password" class="form-control" placeholder="••••••••">
+          </div>
+
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="agree">
+            <label class="form-check-label small" for="agree">
+              Saya setuju dengan <a href="#" class="text-primary text-decoration-none">Syarat & Ketentuan</a>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">Daftar Sekarang</button>
+        </form>
+
+        <div class="text-center mt-3 small">
+          Sudah punya akun? <a [routerLink]="['/login']" class="text-primary text-decoration-none fw-semibold">Masuk di sini</a>
+        </div>
+    </div>
+  </div>

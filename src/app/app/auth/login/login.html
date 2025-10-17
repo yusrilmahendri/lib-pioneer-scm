@@ -1,0 +1,35 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+            <div class="text-center mb-3">
+            <img src="assets/images/logo.png" alt="PioneerSolve" class="img-fluid mb-2" style="max-width: 120px;">
+            <h5 class="fw-semibold">Masuk ke Akun Anda</h5>
+            </div>
+
+            <form>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="nama@email.com">
+            </div>
+
+            <div class="mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                <label for="password" class="form-label">Password</label>
+                <a [routerLink]="['/forgot-password']" class="text-decoration-none small">Lupa Password?</a>
+                </div>
+                <input type="password" class="form-control" id="password" placeholder="•••••••">
+            </div>
+
+            <button type="submit" (click)="onSubmit()" class="btn btn-primary w-100">Masuk</button>
+            </form>
+
+            <div class="text-center mt-3">
+            <small>Belum punya akun?
+                <a  [routerLink]="['/register']" class="text-primary fw-semibold text-decoration-none">Daftar di sini</a>
+            </small>
+            </div>
+
+            <div class="text-center mt-3">
+            <small class="text-muted">© PioneerSolve 2025</small>
+            </div>
+        </div>
+</div>

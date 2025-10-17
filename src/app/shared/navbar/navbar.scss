@@ -1,0 +1,20 @@
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar-left i {
+  color: #0d6efd;
+  border-radius: 8px;
+}
+
+.navbar-left span {
+  font-size: 0.95rem;
+}

@@ -1,0 +1,84 @@
+$primary-blue: #0d6efd;   // Warna primer Bootstrap
+$success-green: #20c997;  // Hijau kustom untuk Pemasukan (mirip gambar)
+$danger-red: #dc3545;     // Merah bahaya Bootstrap
+$light-gray: #f8f9fa;     // Warna latar belakang umum
+
+// Kelas kustom untuk warna teks
+.text-blue {
+    color: $primary-blue !important;
+}
+
+.text-green {
+    color: $success-green !important;
+}
+
+.text-red {
+    color: $danger-red !important;
+}
+
+// ------------------------------------
+// Styling Lingkaran Icon (Icon Circle)
+// ------------------------------------
+
+.icon-circle {
+    // Ukuran dan Bentuk
+    width: 55px;
+    height: 55px;
+    border-radius: 50%; // Membuat Bulat
+    
+    // Tata Letak Icon
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0; // Mencegah lingkaran mengecil di tata letak flex
+    
+    // Efek Transisi
+    transition: background-color 0.3s ease;
+}
+
+// Warna Background Lingkaran
+.bg-light-blue {
+    background-color: #e6f0ff; // Biru sangat muda (untuk Bisnis Dikelola)
+}
+
+.bg-light-green {
+    background-color: #e0f8f0; // Hijau sangat muda (untuk Pemasukan)
+}
+
+.bg-light-red {
+    background-color: #fcebeb; // Merah sangat muda (untuk Pengeluaran)
+}
+
+// Styling Teks Kecil di Card
+.small-text {
+    font-size: 0.85rem;
+    color: #6c757d; // Warna abu-abu (muted)
+}
+
+/* ====================================
+   3. STYLING TABEL & KONSISTENSI
+   ==================================== */
+
+// Perbaikan visual pada Tabel
+.table-responsive {
+    margin-top: 1rem; // Jarak antara search bar dan tabel
+}
+
+.table {
+    border-radius: 0.5rem;
+    overflow: hidden; // Memastikan border-radius terlihat
+}
+
+.table-light th {
+    font-weight: 600; // Semi-bold untuk header tabel
+    color: #343a40;
+}
+
+// Styling badge untuk Status Bisnis
+.bg-primary-subtle {
+    background-color: #cfe2ff !important; // Warna background kustom yang lebih lembut
+}
+
+.bg-danger-subtle {
+    background-color: #f8d7da !important; // Warna background kustom yang lebih lembut
+}
