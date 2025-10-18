@@ -1,24 +1,49 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common'; // ✅ Tambahkan ini
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Auth {
-   private apiUrl = 'https://api.example.com/auth'; // ganti dengan endpoint-mu
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private platformId = inject(PLATFORM_ID);
+  private apiUrl = 'https://cloud-api-management.pioneersolve.id/api';
 
-  constructor(private http: HttpClient) {}
-
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, { email, password });
+  private buildUrl(endpoint: string): string {
+    return `${this.apiUrl.replace(/\/+$/, '')}/${endpoint.replace(/^\/+/, '')}`;
   }
 
-  forgotPassword(email: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 
-  register(data: { name: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, data);
+  register(data: any) {
+    return this.http.post(this.buildUrl('register'), data);
+  }
+
+  login(credentials: any) {
+    return this.http.post(this.buildUrl('login'), credentials).pipe(
+      tap((res: any) => {
+        if (this.isBrowser()) {
+          localStorage.setItem('token', res.token);
+        }
+      })
+    );
+  }
+
+  logout() {
+    if (this.isBrowser()) {
+      localStorage.removeItem('token');
+      this.router.navigate(['login']);
+    }
+  }
+
+  isAuthenticated(): boolean {
+    if (!this.isBrowser()) return false;
+    return !!localStorage.getItem('token');
   }
 }

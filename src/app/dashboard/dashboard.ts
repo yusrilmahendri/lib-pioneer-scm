@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import * as Highcharts from 'highcharts';
 import { HighchartsChartComponent } from 'highcharts-angular';
+import { Auth } from '../shared/services/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,10 @@ import { HighchartsChartComponent } from 'highcharts-angular';
   styleUrl: './dashboard.scss'
 })
 export class Dashboard {
+  private auth = inject(Auth);
+
+
+
   Highcharts: typeof Highcharts = Highcharts;
 
   // === BAR CHART ===
@@ -115,4 +120,8 @@ export class Dashboard {
       pengeluaran: 'Rp. 500.000',  
     },
   ];
+
+  logout() {
+    this.auth.logout();
+  }
 }

@@ -33,7 +33,7 @@
     <span>Akun Pegawai</span>
   </a>
 
-  <a [routerLink]="['Profile Saya']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
+  <a [routerLink]="['profile-saya']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
     <i class="fa-regular fa-user me-3"></i>
     <span>Data Saya</span>
   </a>
@@ -47,7 +47,7 @@
  <div class="divider"></div>
    <!-- Tombol Logout (Di atas Hubungi Kami) -->
   <div class="w-100">
-    <a  class="nav-link d-flex align-items-center text-danger">
+    <a (click)="logout()" class="nav-link d-flex align-items-center text-danger" style="cursor: pointer;">
       <i class="fa-solid fa-right-from-bracket me-3"></i>
       <span>Keluar Akun</span>
     </a>
