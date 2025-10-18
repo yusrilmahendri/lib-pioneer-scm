@@ -8,7 +8,20 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" formControlName="email" placeholder="nama@email.com">
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    formControlName="email" 
+                    placeholder="nama@email.com" 
+                    [ngClass]="{'is-invalid': f['email'].touched && f['email'].invalid}">
+
+                     <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+                        Email wajib diisi.
+                    </div>
+                    <div class="invalid-feedback" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+                    Format email tidak valid.
+                    </div>
             </div>
 
             <div class="mb-3">
@@ -16,7 +29,16 @@
                 <label for="password" class="form-label">Password</label>
                 <a [routerLink]="['forgot-password']" class="text-decoration-none small">Lupa Password?</a>
                 </div>
-                <input type="password" class="form-control" id="password" formControlName="password" placeholder="•••••••">
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="password" 
+                    formControlName="password" 
+                    placeholder="•••••••"
+                    [ngClass]="{'is-invalid': f['password'].touched && f['password'].invalid}">
+                    <div class="invalid-feedback" *ngIf="f['password'].touched && f['password'].errors?.['required']">
+                        Password wajib diisi.
+                    </div>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Masuk</button>
@@ -24,7 +46,7 @@
 
             <div class="text-center mt-3">
             <small>Belum punya akun?
-                <a  [routerLink]="['register']" class="text-primary fw-semibold text-decoration-none">Daftar di sini</a>
+                <a  [routerLink]="['/register']" class="text-primary fw-semibold text-decoration-none">Daftar di sini</a>
             </small>
             </div>
 
