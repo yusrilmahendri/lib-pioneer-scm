@@ -11,7 +11,8 @@
     <div class="divider"></div>
   </div>
 
-<nav class="nav flex-column w-100 sidebar-menu">
+<!-- Tambahkan flex-grow-1 di sini agar elemen di bawahnya terdorong ke bawah -->
+<nav class="nav flex-column w-100 sidebar-menu **flex-grow-1**">
   <a routerLink="/dashboard" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4 mt-3">
     <i class="fa-solid fa-gauge me-3"></i>
     <span>Dashboard</span>
@@ -34,18 +35,34 @@
 
   <a [routerLink]="['Profile Saya']" routerLinkActive="active" class="nav-link d-flex align-items-center mb-4">
     <i class="fa-regular fa-user me-3"></i>
-    <span>Profil Saya</span>
+    <span>Data Saya</span>
   </a>
+</nav>
 
 
-  <!-- Tombol Logout (Selalu di bagian bawah) -->
-  <div class="w-100 mt-2">
+
+<!-- Bagian Footer Sidebar -->
+<div class="w-100 mt-auto pt-3"> 
+  <!-- Divider sebelum Logout/Bantuan -->
+ <div class="divider"></div>
+   <!-- Tombol Logout (Di atas Hubungi Kami) -->
+  <div class="w-100">
     <a  class="nav-link d-flex align-items-center text-danger">
       <i class="fa-solid fa-right-from-bracket me-3"></i>
       <span>Keluar Akun</span>
     </a>
   </div>
-</nav>
 
+  <!-- Tautan Hubungi Kami (Paling Bawah) -->
+  <div class="w-100 mb-2">
+    <a href="#" class="nav-link d-flex align-items-center text-secondary">
+      <i class="fa-solid fa-circle-info me-3"></i>
+      <span>Hubungi Kami</span>
+    </a>
+  </div>
+
+
+
+</div>
 
 </aside>
