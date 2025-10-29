@@ -18,13 +18,12 @@ jobs:
         with:
           node-version: 20
 
-      - name: 📦 Install Dependencies
-        run: npm ci
+      - name: 📦 Install Dependencies & Angular CLI
+        run: |
+          npm ci
+          npm install -g @angular/cli
 
-      - name: 🏗️ Build Angular App (PWA)
-        run: npm run build --if-present
-      
-      - name: 🏗️ Build configurasi production
+      - name: 🏗️ Build Angular App (Production PWA)
         run: ng build --configuration production
 
       - name: 📂 Verify Build Output
@@ -32,7 +31,7 @@ jobs:
           echo "Build output directory:"
           ls -la dist/
           echo "-------------------------"
-          ls -la dist/lib-pioneer-scm
+          ls -la dist/lib-pioneer-scm/
 
       - name: 🚀 Upload Build to Hostinger via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -42,7 +41,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "dist/lib-pioneer-scm/*"
-          target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm"
+          target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
           overwrite: true
 
       - name: ✅ Deployment Finished
