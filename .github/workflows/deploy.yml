@@ -34,13 +34,11 @@ jobs:
           echo "🔍 Checking dist folder structure..."
           ls -la dist/
           echo "-------------------------"
-          ls -la dist/lib-pioneer-scm/ || echo "⚠️ Folder not found!"
+          ls -la dist/lib-pioneer-scm || echo "⚠️ Folder dist/lib-pioneer-scm not found!"
 
-      # Tambahkan delay singkat agar SSH Hostinger siap menerima koneksi
       - name: ⏳ Wait before deploy
         run: sleep 5
 
-      # Step SCP dengan retry dan timeout lebih lama
       - name: 🚀 Upload Build to Hostinger via SCP (with retry)
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -48,13 +46,13 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
+          # ✅ upload isi dari dist/lib-pioneer-scm langsung ke folder tujuan
           source: "dist/lib-pioneer-scm/*"
           target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
           overwrite: true
           timeout: 120s
           command_timeout: 120s
 
-      # Ulangi upload jika timeout (1x retry)
       - name: 🔁 Retry Upload if Timeout
         if: failure()
         run: |
