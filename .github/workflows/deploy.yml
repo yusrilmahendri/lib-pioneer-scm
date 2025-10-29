@@ -13,27 +13,35 @@ jobs:
       - name: 🔄 Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🧰 Setup Node.js
+      - name: 🧰 Setup Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: 📦 Install Dependencies & Angular CLI
+      - name: 📦 Install Dependencies
         run: |
           npm ci
           npm install -g @angular/cli
 
       - name: 🏗️ Build Angular App (Production PWA)
-        run: ng build --configuration production
+        run: |
+          echo "Starting production build..."
+          ng build --configuration production
+          echo "✅ Build complete!"
 
       - name: 📂 Verify Build Output
         run: |
-          echo "Build output directory:"
+          echo "🔍 Checking dist folder structure..."
           ls -la dist/
           echo "-------------------------"
-          ls -la dist/lib-pioneer-scm/
+          ls -la dist/lib-pioneer-scm/ || echo "⚠️ Folder not found!"
 
-      - name: 🚀 Upload Build to Hostinger via SCP
+      # Tambahkan delay singkat agar SSH Hostinger siap menerima koneksi
+      - name: ⏳ Wait before deploy
+        run: sleep 5
+
+      # Step SCP dengan retry dan timeout lebih lama
+      - name: 🚀 Upload Build to Hostinger via SCP (with retry)
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -43,6 +51,17 @@ jobs:
           source: "dist/lib-pioneer-scm/*"
           target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
           overwrite: true
+          timeout: 120s
+          command_timeout: 120s
+
+      # Ulangi upload jika timeout (1x retry)
+      - name: 🔁 Retry Upload if Timeout
+        if: failure()
+        run: |
+          echo "⚠️ First upload failed. Retrying after 10s..."
+          sleep 10
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -P ${{ secrets.SSH_PORT }} -r dist/lib-pioneer-scm/* \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/ || true
 
       - name: ✅ Deployment Finished
-        run: echo "✅ Deployment completed successfully to kas.pioneersolve.id!"
+        run: echo "✅ Deployment completed successfully to https://kas.pioneersolve.id/"
