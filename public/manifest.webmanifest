@@ -1,9 +1,16 @@
 {
-  "name": "lib-pioneer-scm",
-  "short_name": "lib-pioneer-scm",
+   "id": "/lib-pioneer-scm",
+  "name": "Lib Pioneer SCM",
+  "short_name": "Pioneer SCM",
+  "description": "Aplikasi manajemen bisnis dan SCM dari Pioneer Software Solutions.",
+  "start_url": "/lib-pioneer-scm/?source=pwa",
+  "scope": "/lib-pioneer-scm/",
   "display": "standalone",
-  "scope": "./",
-  "start_url": "./",
+  "orientation": "portrait",
+  "theme_color": "#1976d2",
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "lang": "id-ID",
   "icons": [
     {
       "src": "icons/icon-72x72.png",
