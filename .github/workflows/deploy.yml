@@ -23,13 +23,16 @@ jobs:
 
       - name: 🏗️ Build Angular App (PWA)
         run: npm run build --if-present
+      
+      - name: 🏗️ Build configurasi production
+        run: ng build --configuration production
 
       - name: 📂 Verify Build Output
         run: |
           echo "Build output directory:"
           ls -la dist/
           echo "-------------------------"
-          ls -la dist/lib-pioneer-scm/
+          ls -la dist/lib-pioneer-scm
 
       - name: 🚀 Upload Build to Hostinger via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -39,7 +42,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           source: "dist/lib-pioneer-scm/*"
-          target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
+          target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm"
           overwrite: true
 
       - name: ✅ Deployment Finished
