@@ -33,33 +33,19 @@ jobs:
         run: |
           echo "🔍 Checking dist folder structure..."
           ls -la dist/
-          echo "-------------------------"
-          ls -la dist/lib-pioneer-scm || echo "⚠️ Folder dist/lib-pioneer-scm not found!"
 
-      - name: ⏳ Wait before deploy
-        run: sleep 5
-
-      - name: 🚀 Upload Build to Hostinger via SCP (with retry)
+      - name: 🚀 Upload Build to Hostinger
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          # ✅ upload isi dari dist/lib-pioneer-scm langsung ke folder tujuan
-          source: "dist/lib-pioneer-scm/*"
+          source: "dist/*"
           target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
           overwrite: true
           timeout: 120s
           command_timeout: 120s
-
-      - name: 🔁 Retry Upload if Timeout
-        if: failure()
-        run: |
-          echo "⚠️ First upload failed. Retrying after 10s..."
-          sleep 10
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -P ${{ secrets.SSH_PORT }} -r dist/lib-pioneer-scm/* \
-            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/ || true
 
       - name: ✅ Deployment Finished
         run: echo "✅ Deployment completed successfully to https://kas.pioneersolve.id/"
