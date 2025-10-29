@@ -6,25 +6,41 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🔐 Deploy to Hostinger via SSH
-        uses: appleboy/ssh-action@v1.0.0
+      - name: 🔄 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Angular App
+        run: npm run build --if-present
+
+      - name: 📂 Verify Build Output
+        run: |
+          echo "Build output directory:"
+          ls -la dist/
+          echo "-------------------------"
+          ls -la dist/lib-pioneer-scm/
+
+      - name: 🚀 Upload Build to Hostinger via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd /home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm
-            git fetch --all
-            git reset --hard origin/main
-            npm ci
-            npm run build --if-present
+          source: "dist/lib-pioneer-scm/*"
+          target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
+          overwrite: true
 
-            rm -rf /home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/*
-            cp -r dist/* /home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/
-
-            echo "✅ Deployment completed successfully to kas.pioneersolve.id!"
+      - name: ✅ Deployment Finished
+        run: echo "✅ Deployment completed successfully to kas.pioneersolve.id!"
