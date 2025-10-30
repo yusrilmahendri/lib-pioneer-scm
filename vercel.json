@@ -1,11 +1,22 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+  "functions": {
+    "dist/lib-pioneer-scm/server/server.mjs": {
+      "runtime": "nodejs20.x"
     }
-  ],
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/lib-pioneer-scm" 
+  },
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(assets|manifest.webmanifest|ngsw-worker.js|safety-worker.js|worker-basic.min.js|favicon.ico|.*\\.js|.*\\.css|.*\\.png|.*\\.jpg|.*\\.svg)$",
+      "dest": "dist/lib-pioneer-scm/browser/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "dist/lib-pioneer-scm/server/server.mjs"
+    }
+  ]
 }
