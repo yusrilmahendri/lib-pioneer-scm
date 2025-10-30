@@ -1,7 +1,7 @@
 {
   "functions": {
     "dist/lib-pioneer-scm/server/server.mjs": {
-      "runtime": "nodejs20.x"
+      "runtime": "@vercel/node@20.x" 
     }
   },
   "build": {
