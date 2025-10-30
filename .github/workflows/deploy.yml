@@ -1,4 +1,4 @@
-name: 🚀 Remote Git Deploy to Hostinger (PWA Ready)
+name: 🚀 Remote Git Deploy to productions (PWA Ready)
 
 on:
   push:
@@ -23,29 +23,32 @@ jobs:
           npm ci
           npm install -g @angular/cli
 
-      - name: 🏗️ Build Angular App (Production PWA)
+      - name: 🏗️ Build Angular App (Production)
         run: |
-          echo "Starting production build..."
+          echo "🚧 Building Angular production build..."
           ng build --configuration production
           echo "✅ Build complete!"
 
       - name: 📂 Verify Build Output
         run: |
-          echo "🔍 Checking dist folder structure..."
+          echo "🔍 Checking dist folder..."
           ls -la dist/
+          echo "---------------------------"
+          ls -la dist/lib-pioneer-scm || echo "⚠️ Subfolder not found"
 
-      - name: 🚀 Upload Build to Hostinger
+      - name: 🚀 Upload to Hostinger via SCP
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "dist/*"
+          # 👇 Upload isi dalam dist/lib-pioneer-scm langsung ke target server
+          source: "dist/lib-pioneer-scm/*"
           target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
           overwrite: true
           timeout: 120s
           command_timeout: 120s
 
-      - name: ✅ Deployment Finished
-        run: echo "✅ Deployment completed successfully to https://kas.pioneersolve.id/"
+      - name: ✅ Deployment Done
+        run: echo "🎉 Deployment finished successfully!"
