@@ -1,12 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:ssr",
+  "buildCommand": "npm run build",
   "installCommand": "npm install",
   "outputDirectory": "dist/lib-pioneer-scm/browser",
   "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
