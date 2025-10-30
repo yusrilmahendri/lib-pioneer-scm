@@ -28,7 +28,7 @@ export class Register implements OnInit {
     return this.form.controls;
   }
 
-  // ✅ Validasi password harus sama
+  // ✅ Validasi password 
   passwordMatchValidator(group: FormGroup) {
     const password = group.get('password')?.value;
     const confirm = group.get('password_confirmation')?.value;
