@@ -35,6 +35,8 @@ jobs:
           ls -la dist/
           echo "---------------------------"
           ls -la dist/lib-pioneer-scm || echo "⚠️ Subfolder not found"
+          echo "---------------------------"
+          ls -la dist/lib-pioneer-scm/browser || echo "⚠️ Browser subfolder not found"
 
       - name: 🚀 Upload to Hostinger via SCP
         uses: appleboy/scp-action@v0.1.7
@@ -43,9 +45,11 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          # 👇 Upload isi dalam dist/lib-pioneer-scm langsung ke target server
-          source: "dist/lib-pioneer-scm/*"
+
+          # ✅ Upload isi folder browser langsung ke root hosting
+          source: "dist/lib-pioneer-scm/browser/*"
           target: "/home/u462762732/domains/pioneersolve.id/public_html/lib-pioneer-scm/"
+
           overwrite: true
           timeout: 120s
           command_timeout: 120s
