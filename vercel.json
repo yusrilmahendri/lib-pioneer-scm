@@ -1,27 +1,12 @@
 {
   "version": 2,
-  "builds": [
+  "buildCommand": "npm run build:ssr",
+  "installCommand": "npm install",
+  "outputDirectory": "dist/lib-pioneer-scm/browser",
+  "rewrites": [
     {
-      "src": "dist/lib-pioneer-scm/server/server.mjs",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/lib-pioneer-scm/browser/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/dist/lib-pioneer-scm/browser/assets/$1"
-    },
-    {
-      "src": "/(.*).(js|css|png|jpg|ico|svg|json)",
-      "dest": "/dist/lib-pioneer-scm/browser/$1.$2"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/lib-pioneer-scm/server/server.mjs"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
